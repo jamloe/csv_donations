@@ -7,7 +7,7 @@ Created on Fri Mar 11 17:11:50 2022
 
 """
 
-__version__ = '2022.04'
+__version__ = '2022.05'
 
 import re
 import pandas as pd
@@ -75,7 +75,7 @@ def format_df(df):
     
     #Make all addresses 3 lines long
     df['address'] = df['address'].apply(lambda row:re.sub(r'\n',' ',row,1) if row.count('\n')==3 else row)
-    return df, report_period    
+    return df.drop('',axis=1), report_period    
 
 def parse_address(df):
     #parses df['address'] into the lines below:
@@ -92,18 +92,22 @@ def parse_address(df):
     address_df['Country'] = address_df['Country'].apply(lambda row:('Canada' if row=='CAN' else row))
     return address_df
 
-df, fname = read_valid_excel_file()
+def main(df,fname):
+    #get the account number
+    df, account_num = get_account_number(df)
+    
+    #format the dataframe
+    formatted_df,report_period = format_df(df)
+    #parse the address
+    address_df = parse_address(formatted_df)
+    #merge the databases together
+    df = pd.concat([formatted_df,address_df], axis=1)
+    #name and save the new dataframe as a csv file
+    output_filename_string = 'parsed_{}_{}.csv'.format(account_num, report_period)
+    df.to_csv("parsed_{}_{}.csv".format(account_num,report_period), index=False, encoding='utf-8', )
+    print('Your new file will be called {}'.format(output_filename_string))
+    return df
 
-#get the account number
-df, account_num = get_account_number(df)
-
-#format the dataframe
-formatted_df,report_period = format_df(df)
-#parse the address
-address_df = parse_address(formatted_df)
-#merge the databases together
-df = pd.concat([df,address_df], axis=1)
-#name and save the new dataframe as a csv file
-output_filename_string = 'parsed_{}_{}.csv'.format(account_num, report_period)
-df.to_csv("parsed_{}_{}.csv".format(account_num,report_period), index=False, encoding='utf-8', )
-print('Your new file will be called {}:'.format(output_filename_string))
+if __name__ == '__main__':
+    df, fname = read_valid_excel_file()
+    output = main(df,fname)
