@@ -6,6 +6,8 @@ Created on Sun Jan 21 16:39:28 2018
 """
 __version__ = '1.21'
 
+#python program to run on older PI Canada donor reports prior to  October 2021.
+
 import re
 import dateutil.parser as p
 import pandas as pd
