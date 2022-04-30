@@ -5,5 +5,7 @@ A tool to convert PI Canada's monthly donor record, from 2022.01 onward, into a 
   3. Enter you employee ID number.
   
  The output file will be a tntdatasync file compatable for use at https://mpdx.org/ and on the old tntconnect v3.26.
+ 
+ For older monthly donor records use csv_donationsv1-21.py for their conversion to a csv file ready for the data converter.
 
 buy me a ☕ 😃 🥺?
