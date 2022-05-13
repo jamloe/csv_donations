@@ -1,5 +1,5 @@
 # csv_donations
-Use PICXTransformer_2022.py to convert PI Canada's monthly donor record, from January 2022 onward, into a user friendly format for the data converter at https://tnt.clcusa.org/
+Use PICXTransformer_2022.py to convert PI Canada's monthly donor record in xlsx format, from January 2022 onward, into a user friendly format for the data converter at https://tnt.clcusa.org/
   1. Copy/Drag/Drop PICXTransformer_2022 into the folder you use for your records.
   2. Open your terminal, change to the folder you use for your records, run: python PICXTransformer_2022.py (use Google to learn how to do these steps)
   3. Open https://tnt.clcusa.org/ in your browser
